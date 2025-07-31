@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cisco Market Review: Architecting the AI-Era Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F7FF;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .kpi-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 6px solid #0077B6;
+        }
+        .kpi-value {
+            font-size: 2.5rem;
+            line-height: 2.75rem;
+            font-weight: 900;
+            color: #03045E;
+        }
+        .kpi-label {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 600;
+            color: #4895EF;
+            margin-top: 0.5rem;
+        }
+        .strategy-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            height: 100%;
+        }
+        .strategy-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #00B4D8;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-12">
+
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-black mb-2" style="color: #03045E;">Architecting the AI Era</h1>
+            <p class="text-lg md:text-xl font-semibold" style="color: #0077B6;">Analyzing Cisco's Strategic Pivot from Networking Stalwart to AI Powerhouse</p>
+        </header>
+
+        <section id="intro" class="max-w-4xl mx-auto text-center mb-12 md:mb-16">
+            <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">A New Blueprint for Growth</h2>
+            <p class="text-md" style="color: #023E8A;">
+                Cisco is in the midst of a profound transformation, leveraging its massive scale to become an integrated, AI-first platform company. Its impressive Q3 2025 results provide the first clear validation of a multi-year strategy built on AI infrastructure leadership, the landmark Splunk acquisition, and a pivotal alliance with NVIDIA.
+            </p>
+        </section>
+
+        <section id="kpis" class="mb-12 md:mb-16">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">Q3 FY2025 by the Numbers</h2>
+                 <p class="text-md" style="color: #023E8A;">
+                    The fiscal third-quarter results showcased broad-based strength, exceeding market expectations and signaling that the company's growth engines are firing on all cylinders.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+                <div class="kpi-card">
+                    <div class="kpi-value">$14.1B</div>
+                    <div class="kpi-label">Total Revenue (+11% YoY)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$0.96</div>
+                    <div class="kpi-label">Non-GAAP EPS (+9% YoY)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">54%</div>
+                    <div class="kpi-label">Security Revenue Growth</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$1B+</div>
+                    <div class="kpi-label">YTD AI Infrastructure Orders</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="segment-performance" class="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-12 md:mb-16">
+             <div class="text-left mb-6">
+                <h2 class="text-3xl font-bold mb-2" style="color: #03045E;">Engines of Growth</h2>
+                <p class="text-md" style="color: #023E8A;">
+                    A look at Cisco's realigned product segments clearly validates its strategic priorities. The acquisition of Splunk supercharged the Security and Observability segments, while the core Networking business remained robust, demonstrating healthy organic growth.
+                </p>
+            </div>
+            <div class="chart-container">
+                <canvas id="segmentChart"></canvas>
+            </div>
+        </section>
+
+        <section id="strategy-pillars" class="mb-12 md:mb-16">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">The Three Pillars of Transformation</h2>
+                <p class="text-md" style="color: #023E8A;">
+                    Cisco's resurgence is not accidental. It is the result of a deliberate, multi-pronged strategy focused on dominating the key technology shifts of the next decade.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="strategy-card">
+                    <div class="strategy-icon">🤖</div>
+                    <h3 class="text-xl font-bold my-2" style="color: #0077B6;">AI Infrastructure Leadership</h3>
+                    <p style="color: #023E8A;">By providing the essential "picks and shovels" for the AI gold rush, Cisco has rapidly become a core enabler of AI workloads, securing over $1 billion in orders from the world's most demanding hyperscale customers and outmaneuvering key rivals.</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-icon">🛡️</div>
+                    <h3 class="text-xl font-bold my-2" style="color: #0077B6;">The Splunk Effect</h3>
+                    <p style="color: #023E8A;">The landmark acquisition of Splunk instantly created a best-in-class Security and Observability platform. This move repositions Cisco as a direct competitor to security-first platform leaders and creates a powerful data gravity effect around its ecosystem.</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-icon">🤝</div>
+                    <h3 class="text-xl font-bold my-2" style="color: #0077B6;">The NVIDIA Alliance</h3>
+                    <p style="color: #023E8A;">A deep, technical partnership with the undisputed leader in AI computing gives Cisco a massive competitive moat. The co-engineered "Secure AI Factory" provides customers with a validated, integrated solution that accelerates AI adoption and simplifies complexity.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="valuation" class="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-12 md:mb-16">
+             <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">Valuation in a New Context</h2>
+                <p class="text-md" style="color: #023E8A;">
+                    As the market begins to recognize Cisco's transformation, its valuation appears attractive compared to its high-growth peers in AI networking and security.
+                </p>
+            </div>
+            <div class="chart-container h-80 max-h-[400px]">
+                <canvas id="valuationChart"></canvas>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 md:mt-16 pt-8 border-t-2" style="border-color: #ADE8F4;">
+            <p class="max-w-3xl mx-auto font-semibold" style="color: #023E8A;">
+                Cisco has successfully architected a new foundation for growth. By moving from a position of defending its legacy to aggressively shaping the future of enterprise IT, the company has positioned itself as an indispensable enabler of the AI era, creating a compelling outlook for long-term investors.
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        function wrapLabel(str, max_width) {
+            if (str.length <= max_width) return str;
+            const words = str.split(' ');
+            let lines = [];
+            let current_line = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((current_line + " " + words[i]).length > max_width) {
+                    lines.push(current_line);
+                    current_line = words[i];
+                } else {
+                    current_line += " " + words[i];
+                }
+            }
+            lines.push(current_line);
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) return label.join(' ');
+            return label;
+        };
+
+        const brilliantBlues = {
+            textPrimary: '#03045E',
+            textSecondary: '#0077B6',
+            accent1: '#00B4D8',
+            accent2: '#90E0EF',
+            accent3: '#CAF0F8',
+            highlight: '#4895EF'
+        };
+
+        const segmentCtx = document.getElementById('segmentChart');
+        if (segmentCtx) {
+            new Chart(segmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Security', 'Observability', 'Networking', 'Collaboration'],
+                    datasets: [{
+                        label: 'YoY Revenue Growth (%)',
+                        data: [54, 24, 8, 4],
+                        backgroundColor: [
+                            brilliantBlues.highlight,
+                            brilliantBlues.accent1,
+                            brilliantBlues.accent2,
+                            brilliantBlues.accent3
+                        ],
+                        borderColor: brilliantBlues.textSecondary,
+                        borderWidth: 1,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'YoY Growth (%)', color: brilliantBlues.textPrimary },
+                            grid: { color: '#e0e0e0' },
+                            ticks: { color: brilliantBlues.textSecondary }
+                        },
+                        y: { 
+                            grid: { display: false }, 
+                            ticks: { color: brilliantBlues.textPrimary, font: { size: 14 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: { title: tooltipTitleCallback },
+                            backgroundColor: brilliantBlues.textPrimary,
+                        }
+                    }
+                }
+            });
+        }
+
+        const valuationCtx = document.getElementById('valuationChart');
+        if (valuationCtx) {
+            new Chart(valuationCtx, {
+                type: 'bar',
+                data: {
+                    labels: [wrapLabel('Cisco (CSCO)', 16), wrapLabel('Arista Networks (ANET)', 16), wrapLabel('Palo Alto Networks (PANW)', 16)],
+                    datasets: [{
+                        label: 'Forward P/E Ratio',
+                        data: [17, 33, 45],
+                        backgroundColor: [
+                            brilliantBlues.highlight,
+                            brilliantBlues.accent1,
+                            brilliantBlues.textSecondary
+                        ],
+                        barPercentage: 0.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Forward P/E Ratio', color: brilliantBlues.textPrimary },
+                            grid: { color: '#e0e0e0' },
+                            ticks: { color: brilliantBlues.textSecondary }
+                        },
+                        x: { 
+                            grid: { display: false },
+                            ticks: { color: brilliantBlues.textPrimary, font: { size: 12 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: { title: tooltipTitleCallback },
+                            backgroundColor: brilliantBlues.textPrimary,
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
