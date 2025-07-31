@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JFrog (FROG) Stock Analysis with Gemini AI - May 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .kpi-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 5px solid #0077B6;
+        }
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #03045E;
+        }
+        .kpi-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4895EF;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2.5rem;
+            border-left: 2px solid #CAF0F8;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.6rem;
+            top: 0.15rem;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 9999px;
+            background-color: #00B4D8;
+            border: 2px solid white;
+        }
+        .timeline-content h3 {
+            font-weight: 700;
+            color: #03045E;
+        }
+        .timeline-content p {
+            color: #023E8A;
+        }
+        .gemini-button {
+            background-color: #0077B6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .gemini-button:hover {
+            background-color: #023E8A;
+        }
+        .gemini-output {
+            background-color: #E7F5FF;
+            border-left: 4px solid #4895EF;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+            color: #03045E;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4895EF;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50" style="background-color: #F0F7FF;">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-black mb-2" style="color: #03045E;">JFrog's Decisive Moment</h1>
+            <p class="text-lg md:text-xl font-semibold" style="color: #0077B6;">An Interactive Analysis of FROG's Performance in May 2025</p>
+        </header>
+
+        <section id="overview" class="mb-16">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">A Month of Two Halves</h2>
+                <p class="text-md" style="color: #023E8A;">
+                    May 2025 was a pivotal month for JFrog's stock. It wasn't a steady climb but a dramatic shift in valuation. The month began with cautious trading, which gave way to a powerful rally after a stunning earnings report. This infographic breaks down that story.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="kpi-card">
+                    <div class="kpi-value">$40.59</div>
+                    <div class="kpi-label">Average Closing Price</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$34.39</div>
+                    <div class="kpi-label">Monthly Low (May 6)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$43.55</div>
+                    <div class="kpi-label">Monthly High (May 20)</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="price-trend" class="mb-16 bg-white rounded-lg shadow-md p-6">
+             <div class="text-left mb-6">
+                <h2 class="text-3xl font-bold mb-2" style="color: #03045E;">The Earnings Breakout</h2>
+                <p class="text-md" style="color: #023E8A;">
+                    This chart visualizes the daily closing price of FROG stock throughout May. The dramatic jump on May 9th, following the Q1 earnings release, is clearly visible. It marks the moment the stock broke out of its tight trading range and established a new, higher valuation plateau.
+                </p>
+            </div>
+            <div class="chart-container h-[40vh] md:h-96 max-h-[500px]">
+                <canvas id="priceTrendChart"></canvas>
+            </div>
+        </section>
+        
+        <section id="gemini-insights" class="mb-16 bg-white rounded-lg shadow-md p-6">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold mb-2" style="color: #03045E;">Gemini AI Insights</h2>
+                <p class="text-md" style="color: #023E8A;">
+                    Use the power of AI to generate a deeper analysis of the data.
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+                <button id="generateAnalysisBtn" class="gemini-button">✨ Generate AI Analysis</button>
+                <button id="generateForecastBtn" class="gemini-button">✨ Forecast Potential Scenarios</button>
+            </div>
+            <div id="geminiOutputContainer" class="mt-6">
+                <div id="geminiLoader" class="loader hidden"></div>
+                <div id="geminiOutput" class="gemini-output hidden"></div>
+            </div>
+        </section>
+
+        <section id="catalyst" class="mb-16">
+             <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">The Catalyst: A Four-Phase Event</h2>
+                <p class="text-md" style="color: #023E8A;">
+                    The stock's re-rating wasn't random; it was a direct reaction to the Q1 2025 earnings report. The process unfolded in four clear phases, from anticipation to institutional validation.
+                </p>
+            </div>
+            <div class="relative">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Phase 1: Anticipation (May 1-7)</h3>
+                        <p>The market holds its breath. The stock trades flat as investors await the Q1 earnings report, with all eyes on the upcoming announcement.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Phase 2: The Beat (May 8)</h3>
+                        <p>After market close, JFrog announces Q1 results that surpass analyst estimates for both revenue and earnings—a strong bullish signal.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Phase 3: The Reaction (May 9)</h3>
+                        <p>The market reacts decisively. The stock surges <strong>+10.61%</strong> in a single day, a fundamental re-rating of the company's value.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="border-left: 2px solid transparent;">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Phase 4: Validation (May 13)</h3>
+                        <p>Franklin Resources Inc. discloses a new <strong>$12.6M position</strong>, a major vote of confidence from "smart money" that validates the new, higher price level.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="valuation" class="mb-16">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">Valuation: A Premium Justified by Growth</h2>
+                 <p class="text-md" style="color: #023E8A;">
+                    Why is the market willing to pay a premium for JFrog? It comes down to superior growth prospects compared to its peers. The Price/Earnings-to-Growth (PEG) ratio tells the story.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-center mb-4" style="color: #03045E;">PEG Ratio: FROG vs. Peers</h3>
+                     <p class="text-sm text-center mb-4" style="color: #023E8A;">A PEG ratio around 1 suggests fair value for a growth stock. A negative PEG implies expected earnings decline. JFrog's positive PEG stands in stark contrast to its peers, signaling market confidence in its future earnings growth.</p>
+                    <div class="chart-container h-80 max-h-[350px]">
+                        <canvas id="pegRatioChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-center mb-4" style="color: #03045E;">Analyst Price Targets</h3>
+                     <p class="text-sm text-center mb-4" style="color: #023E8A;">Wall Street analysts were overwhelmingly positive, with a consensus "Buy" rating. Their price targets indicated significant upside potential even after the May rally.</p>
+                    <div class="chart-container h-80 max-h-[350px]">
+                        <canvas id="analystTargetsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 pt-8 border-t-2" style="border-color: #ADE8F4;">
+            <p class="font-bold" style="color: #03045E;">The Takeaway</p>
+            <p class="max-w-3xl mx-auto" style="color: #023E8A;">
+                May 2025 was the month JFrog's market valuation caught up to its fundamental strength. The average price of $40.59 marks a transition point, not a destination. The next major catalyst will be the Q2 earnings report on August 7, 2025.
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        function wrapLabel(str, max_width) {
+            if (str.length <= max_width) {
+                return str;
+            }
+            const words = str.split(' ');
+            let lines = [];
+            let current_line = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((current_line + " " + words[i]).length > max_width) {
+                    lines.push(current_line);
+                    current_line = words[i];
+                } else {
+                    current_line += " " + words[i];
+                }
+            }
+            lines.push(current_line);
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const brilliantBlues = {
+            background: 'rgba(240, 247, 255, 0.6)',
+            textPrimary: '#03045E',
+            textSecondary: '#0077B6',
+            accent1: '#00B4D8',
+            accent2: '#90E0EF',
+            accent3: '#CAF0F8',
+            highlight: '#4895EF'
+        };
+
+        const priceData = {
+            labels: ['May 01', 'May 02', 'May 05', 'May 06', 'May 07', 'May 08', 'May 09', 'May 12', 'May 13', 'May 14', 'May 15', 'May 16', 'May 19', 'May 20', 'May 21', 'May 22', 'May 23', 'May 27', 'May 28', 'May 29', 'May 30'],
+            prices: [34.52, 34.83, 34.40, 34.39, 34.55, 35.26, 39.00, 40.43, 42.18, 42.77, 43.17, 43.11, 42.66, 43.55, 42.61, 42.77, 42.49, 43.10, 42.72, 42.90, 42.94]
+        };
+
+        new Chart(document.getElementById('priceTrendChart'), {
+            type: 'line',
+            data: {
+                labels: priceData.labels,
+                datasets: [{
+                    label: 'FROG Closing Price ($)',
+                    data: priceData.prices,
+                    borderColor: brilliantBlues.highlight,
+                    backgroundColor: 'rgba(72, 149, 239, 0.2)',
+                    fill: true,
+                    tension: 0.1,
+                    pointBackgroundColor: brilliantBlues.highlight,
+                    pointRadius: 3,
+                    pointHoverRadius: 6,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: { display: true, text: 'Closing Price (USD)', color: brilliantBlues.textPrimary },
+                        grid: { color: brilliantBlues.accent3 },
+                        ticks: { color: brilliantBlues.textSecondary }
+                    },
+                    x: {
+                        title: { display: true, text: 'Date in May 2025', color: brilliantBlues.textPrimary },
+                        grid: { display: false },
+                        ticks: { color: brilliantBlues.textSecondary }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback },
+                        backgroundColor: brilliantBlues.textPrimary,
+                        titleColor: 'white',
+                        bodyColor: 'white',
+                    }
+                }
+            }
+        });
+
+        const pegData = {
+            labels: ['JFrog (FROG)', 'Peer Group Average'],
+            values: [1.20, -0.42]
+        };
+        new Chart(document.getElementById('pegRatioChart'), {
+            type: 'bar',
+            data: {
+                labels: pegData.labels,
+                datasets: [{
+                    label: 'PEG Ratio',
+                    data: pegData.values,
+                    backgroundColor: [brilliantBlues.highlight, brilliantBlues.accent2],
+                    borderColor: [brilliantBlues.textSecondary, brilliantBlues.textSecondary],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        title: { display: true, text: 'PEG Ratio', color: brilliantBlues.textPrimary },
+                        grid: { color: brilliantBlues.accent3 },
+                        ticks: { color: brilliantBlues.textSecondary }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: brilliantBlues.textSecondary }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback },
+                        backgroundColor: brilliantBlues.textPrimary,
+                    }
+                }
+            }
+        });
+
+        const analystTargetData = {
+            labels: [wrapLabel('Raymond James', 16), wrapLabel('KeyBanc', 16), wrapLabel('Cantor Fitzgerald', 16), wrapLabel('FBN Securities', 16)],
+            targets: [50, 52, 46, 45]
+        };
+        new Chart(document.getElementById('analystTargetsChart'), {
+            type: 'bar',
+            data: {
+                labels: analystTargetData.labels,
+                datasets: [{
+                    label: 'Price Target ($)',
+                    data: analystTargetData.targets,
+                    backgroundColor: [brilliantBlues.accent1, brilliantBlues.highlight, brilliantBlues.accent2, brilliantBlues.textSecondary],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: { display: true, text: 'Price Target (USD)', color: brilliantBlues.textPrimary },
+                        grid: { color: brilliantBlues.accent3 },
+                        ticks: { color: brilliantBlues.textSecondary }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: brilliantBlues.textSecondary }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback },
+                        backgroundColor: brilliantBlues.textPrimary,
+                    }
+                }
+            }
+        });
+
+        const geminiLoader = document.getElementById('geminiLoader');
+        const geminiOutput = document.getElementById('geminiOutput');
+        
+        async function callGeminiAPI(prompt, maxRetries = 3) {
+            geminiLoader.classList.remove('hidden');
+            geminiOutput.classList.add('hidden');
+            geminiOutput.innerHTML = '';
+
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }]
+            };
+
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API call failed with status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    geminiLoader.classList.add('hidden');
+                    if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        geminiOutput.innerHTML = text.replace(/\n/g, '<br>');
+                        geminiOutput.classList.remove('hidden');
+                    } else {
+                         geminiOutput.innerHTML = 'Sorry, the AI analysis could not be generated at this time.';
+                         geminiOutput.classList.remove('hidden');
+                    }
+                    return;
+
+                } catch (error) {
+                    console.error(`Attempt ${i + 1} failed:`, error);
+                    if (i === maxRetries - 1) {
+                        geminiLoader.classList.add('hidden');
+                        geminiOutput.innerHTML = 'Error: Could not connect to the AI service after multiple attempts.';
+                        geminiOutput.classList.remove('hidden');
+                    }
+                    await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, i)));
+                }
+            }
+        }
+
+        document.getElementById('generateAnalysisBtn').addEventListener('click', () => {
+            const prompt = `
+                You are a financial analyst. Based on the following data for JFrog (FROG) stock in May 2025, write a concise summary of its performance.
+                
+                Key Data:
+                - Average Closing Price: $40.59
+                - Monthly Low: $34.39
+                - Monthly High: $43.55
+                - Key Event 1 (May 8): Q1 earnings beat analyst estimates.
+                - Key Event 2 (May 9): Stock surged +10.61%.
+                - Key Event 3 (May 13): Franklin Resources disclosed a new $12.6M position.
+                
+                Focus on the narrative of a 'month of two halves' and the impact of the earnings report. Keep the tone professional and insightful.
+            `;
+            callGeminiAPI(prompt);
+        });
+
+        document.getElementById('generateForecastBtn').addEventListener('click', () => {
+            const prompt = `
+                You are a financial analyst. Given the performance of JFrog (FROG) stock in May 2025, which saw a major re-rating after a strong Q1 earnings beat and a new institutional investment, generate three potential future scenarios for the next quarter (Q2 2025):
+
+                1. **Bullish Scenario:** What could drive the stock higher?
+                2. **Bearish Scenario:** What are the potential risks or headwinds?
+                3. **Neutral Scenario:** What could cause the stock to trade sideways?
+
+                Base your analysis on the provided context. Be creative but plausible. Format the output clearly with headings for each scenario.
+            `;
+            callGeminiAPI(prompt);
+        });
+
+    </script>
+</body>
+</html>
