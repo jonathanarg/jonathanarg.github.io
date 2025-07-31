@@ -3,396 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JFrog (FROG) Q2 2025 Earnings Preview with Gemini AI</title>
+    <title>Frog Information Hub</title>
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Use the Inter font family */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F0F7FF;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 40vh;
-            max-height: 450px;
-        }
-        .kpi-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            padding: 1.5rem;
-            text-align: center;
-            border-left: 6px solid #0077B6;
-        }
-        .kpi-value {
-            font-size: 2.25rem;
-            line-height: 2.5rem;
-            font-weight: 900;
-            color: #03045E;
-        }
-        .kpi-label {
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            font-weight: 600;
-            color: #4895EF;
-            margin-top: 0.5rem;
-        }
-        .scenario-card {
-            background-color: white;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        }
-        .scenario-icon {
-            font-size: 2.5rem;
-            line-height: 1;
-        }
-        .gemini-button {
-            background-color: #0077B6;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
-        .gemini-button:hover {
-            background-color: #023E8A;
-        }
-        .gemini-output {
-            background-color: #E7F5FF;
-            border-left: 4px solid #4895EF;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0.25rem;
-            color: #03045E;
-            white-space: pre-wrap;
-        }
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #4895EF;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="bg-gray-50 text-gray-800">
 
-    <div class="container mx-auto p-4 sm:p-6 md:p-12">
+    <!-- Main container -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12 text-center">
 
-        <header class="text-center mb-12 md:mb-16">
-            <h1 class="text-4xl md:text-5xl font-black mb-2" style="color: #03045E;">High Stakes for a High-Flyer</h1>
-            <p class="text-lg md:text-xl font-semibold" style="color: #0077B6;">JFrog's Q2 Earnings Showdown After a Rally Fueled by AI Hype</p>
-        </header>
-
-        <section id="intro" class="max-w-4xl mx-auto text-center mb-12 md:mb-16">
-            <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">The Quiet Before the Storm</h2>
-            <p class="text-md" style="color: #023E8A;">
-                July 2025 was a tale of two moods for JFrog's stock. After consolidating the major gains from May, a late-month surge of investor enthusiasm, driven by a powerful AI narrative, has set a high bar for the upcoming Q2 earnings call. The market is no longer just watching; it's expecting a decisive outperformance.
-            </p>
-        </section>
-
-        <section id="kpis" class="mb-12 md:mb-16">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
-                <div class="kpi-card">
-                    <div class="kpi-value">$41.88</div>
-                    <div class="kpi-label">Avg. July Closing Price</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">$45.47</div>
-                    <div class="kpi-label">New 52-Week High</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">$0.16</div>
-                    <div class="kpi-label">Consensus EPS Estimate</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">$122.8M</div>
-                    <div class="kpi-label">Consensus Revenue Estimate</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="price-trend" class="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-12 md:mb-16">
-             <div class="text-left mb-6">
-                <h2 class="text-3xl font-bold mb-2" style="color: #03045E;">The Pre-Earnings Rally</h2>
-                <p class="text-md" style="color: #023E8A;">
-                    This chart visualizes the daily closing price of FROG stock throughout July. For three weeks, the stock traded sideways, digesting prior gains. The dramatic surge in the final trading days reveals the market's growing excitement and elevated expectations, pushing the stock well above analyst price targets ahead of the earnings report.
+            <!-- Header Section -->
+            <header>
+                <h1 class="text-4xl md:text-5xl font-bold text-emerald-600 mb-4">
+                    Frog Information Hub
+                </h1>
+                <p class="text-lg text-gray-600 mb-8">
+                    Welcome! Please select a page below to learn more about frogs.
                 </p>
-            </div>
-            <div class="chart-container">
-                <canvas id="priceTrendChart"></canvas>
-            </div>
-        </section>
-        
-        <section id="gemini-insights" class="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-12 md:mb-16">
-            <div class="text-center mb-6">
-                <h2 class="text-3xl font-bold mb-2" style="color: #03045E;">Gemini AI Insights</h2>
-                <p class="text-md" style="color: #023E8A;">
-                    Use the power of AI to generate a deeper analysis of the data.
-                </p>
-            </div>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-                <button id="generateAnalysisBtn" class="gemini-button">✨ Generate AI Analysis</button>
-                <button id="generateForecastBtn" class="gemini-button">✨ Forecast Potential Scenarios</button>
-            </div>
-            <div id="geminiOutputContainer" class="mt-6">
-                <div id="geminiLoader" class="loader hidden"></div>
-                <div id="geminiOutput" class="gemini-output hidden"></div>
-            </div>
-        </section>
+            </header>
 
-        <section id="catalysts" class="mb-12 md:mb-16">
-            <div class="text-center max-w-3xl mx-auto mb-8">
-                <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">The Narrative Catalyst: Building the AI Story</h2>
-                <p class="text-md" style="color: #023E8A;">
-                    The late-July rally wasn't random. It was fueled by strategic announcements that successfully positioned JFrog as a central player in the high-growth AI infrastructure market.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="bg-white rounded-xl shadow-lg p-6 flex items-start space-x-4">
-                    <div class="text-4xl" style="color: #00B4D8;">💡</div>
-                    <div>
-                        <h3 class="font-bold text-lg" style="color: #03045E;">Product Innovation</h3>
-                        <p class="mt-1" style="color: #023E8A;">On July 17, JFrog announced its "Robust MCP Server," directly tying its core platform to AI-driven developer workflows and the essential practice of MLOps.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6 flex items-start space-x-4">
-                     <div class="text-4xl" style="color: #00B4D8;">🤝</div>
-                    <div>
-                        <h3 class="font-bold text-lg" style="color: #03045E;">Ecosystem Leadership</h3>
-                        <p class="mt-1" style="color: #023E8A;">On July 30, the company revealed its swampUP conference would feature speakers from AI leaders like NVIDIA and GitHub, signaling its central role in the ecosystem.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <!-- Links Section -->
+            <main class="space-y-6">
+                <!-- Link to May Frog Info -->
+                <a href="https://jonathanarg.github.io/frog-info-may.html" 
+                   class="block w-full bg-emerald-500 text-white font-bold py-4 px-6 rounded-lg text-xl hover:bg-emerald-600 transition-transform transform hover:scale-105 duration-300 ease-in-out shadow-md">
+                    Frog Info (May)
+                </a>
 
-        <section id="scenarios" class="mb-12 md:mb-16">
-            <div class="text-center max-w-3xl mx-auto mb-8">
-                <h2 class="text-3xl font-bold mb-4" style="color: #03045E;">The Earnings Gauntlet: Three Scenarios</h2>
-                <p class="text-md" style="color: #023E8A;">
-                    With expectations running high, the market's reaction on August 8 will depend on whether JFrog delivers a decisive beat and provides strong forward guidance.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="scenario-card">
-                    <div class="scenario-icon">🚀</div>
-                    <h3 class="text-xl font-bold my-2" style="color: #0077B6;">Bullish Scenario</h3>
-                    <p style="color: #023E8A;">A decisive beat on earnings (EPS >$0.18, Revenue >$125M) and strong Q3 guidance. Management highlights accelerating AI customer adoption. Stock gaps up toward $50.</p>
-                </div>
-                <div class="scenario-card">
-                    <div class="scenario-icon">↔️</div>
-                    <h3 class="text-xl font-bold my-2" style="color: #0077B6;">Neutral Scenario</h3>
-                    <p style="color: #023E8A;">A modest beat but guidance is merely in-line. The AI story is confirmed but not yet quantifiable. Stock drifts sideways or sees minor profit-taking.</p>
-                </div>
-                <div class="scenario-card">
-                    <div class="scenario-icon">📉</div>
-                    <h3 class="text-xl font-bold my-2" style="color: #0077B6;">Bearish Scenario</h3>
-                    <p style="color: #023E8A;">A miss on revenue or EPS, or weak Q3 guidance. Commentary is cautious, slowing growth becomes a concern. Stock sells off sharply toward the $42 level.</p>
-                </div>
-            </div>
-        </section>
+                <!-- Link to July Frog Info -->
+                <a href="https://jonathanarg.github.io/frog-info-july.html" 
+                   class="block w-full bg-teal-500 text-white font-bold py-4 px-6 rounded-lg text-xl hover:bg-teal-600 transition-transform transform hover:scale-105 duration-300 ease-in-out shadow-md">
+                    Frog Info (July)
+                </a>
+            </main>
 
-        <footer class="text-center mt-12 md:mt-16 pt-8 border-t-2" style="border-color: #ADE8F4;">
-            <p class="max-w-3xl mx-auto" style="color: #023E8A;">
-                The key variable for JFrog's Q2 earnings is no longer about delivering a good quarter, but whether it can deliver the exceptional quarter and outlook needed to validate its premium, AI-driven valuation.
-            </p>
-        </footer>
+            <!-- Footer Section -->
+            <footer class="mt-12 text-sm text-gray-400">
+                <p>&copy; 2024 JonathanARG. All rights reserved.</p>
+            </footer>
 
+        </div>
     </div>
 
-    <script>
-        function wrapLabel(str, max_width) {
-            if (str.length <= max_width) {
-                return str;
-            }
-            const words = str.split(' ');
-            let lines = [];
-            let current_line = words[0];
-
-            for (let i = 1; i < words.length; i++) {
-                if ((current_line + " " + words[i]).length > max_width) {
-                    lines.push(current_line);
-                    current_line = words[i];
-                } else {
-                    current_line += " " + words[i];
-                }
-            }
-            lines.push(current_line);
-            return lines;
-        }
-
-        const tooltipTitleCallback = (tooltipItems) => {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            if (Array.isArray(label)) {
-                return label.join(' ');
-            }
-            return label;
-        };
-
-        const brilliantBlues = {
-            textPrimary: '#03045E',
-            textSecondary: '#0077B6',
-            accent1: '#00B4D8',
-            accent2: '#90E0EF',
-            accent3: '#CAF0F8',
-            highlight: '#4895EF'
-        };
-
-        const priceData = {
-            labels: ['Jul 01', 'Jul 02', 'Jul 03', 'Jul 07', 'Jul 08', 'Jul 09', 'Jul 10', 'Jul 11', 'Jul 14', 'Jul 15', 'Jul 16', 'Jul 17', 'Jul 18', 'Jul 21', 'Jul 22', 'Jul 23', 'Jul 24', 'Jul 25', 'Jul 28', 'Jul 29', 'Jul 30', 'Jul 31'],
-            prices: [42.61, 41.35, 42.00, 42.32, 41.81, 42.05, 40.56, 39.83, 39.94, 40.24, 40.30, 40.96, 42.25, 41.95, 42.29, 41.97, 41.62, 41.54, 42.65, 43.36, 45.14, 45.14]
-        };
-
-        const ctx = document.getElementById('priceTrendChart');
-        if (ctx) {
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: priceData.labels,
-                    datasets: [{
-                        label: 'FROG Closing Price ($)',
-                        data: priceData.prices,
-                        borderColor: brilliantBlues.highlight,
-                        backgroundColor: 'rgba(72, 149, 239, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        borderWidth: 3,
-                        pointBackgroundColor: brilliantBlues.highlight,
-                        pointRadius: 2,
-                        pointHoverRadius: 6,
-                        pointHoverBorderColor: 'white',
-                        pointHoverBorderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            title: { display: true, text: 'Closing Price (USD)', color: brilliantBlues.textPrimary, font: { weight: '600' } },
-                            grid: { color: brilliantBlues.accent3 },
-                            ticks: { color: brilliantBlues.textSecondary }
-                        },
-                        x: {
-                            title: { display: true, text: 'Date in July 2025', color: brilliantBlues.textPrimary, font: { weight: '600' } },
-                            grid: { display: false },
-                            ticks: { color: brilliantBlues.textSecondary }
-                        }
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                title: tooltipTitleCallback
-                            },
-                            backgroundColor: brilliantBlues.textPrimary,
-                            titleColor: 'white',
-                            bodyColor: 'white',
-                            padding: 12,
-                            cornerRadius: 6,
-                            displayColors: false
-                        }
-                    }
-                }
-            });
-        }
-        
-        const geminiLoader = document.getElementById('geminiLoader');
-        const geminiOutput = document.getElementById('geminiOutput');
-        
-        async function callGeminiAPI(prompt, maxRetries = 3) {
-            geminiLoader.classList.remove('hidden');
-            geminiOutput.classList.add('hidden');
-            geminiOutput.innerHTML = '';
-
-            const apiKey = ""; 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-            
-            const payload = {
-                contents: [{ role: "user", parts: [{ text: prompt }] }]
-            };
-
-            for (let i = 0; i < maxRetries; i++) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`API call failed with status: ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    
-                    geminiLoader.classList.add('hidden');
-                    if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
-                        const text = result.candidates[0].content.parts[0].text;
-                        geminiOutput.innerHTML = text.replace(/\n/g, '<br>');
-                        geminiOutput.classList.remove('hidden');
-                    } else {
-                         geminiOutput.innerHTML = 'Sorry, the AI analysis could not be generated at this time.';
-                         geminiOutput.classList.remove('hidden');
-                    }
-                    return;
-
-                } catch (error) {
-                    console.error(`Attempt ${i + 1} failed:`, error);
-                    if (i === maxRetries - 1) {
-                        geminiLoader.classList.add('hidden');
-                        geminiOutput.innerHTML = 'Error: Could not connect to the AI service after multiple attempts.';
-                        geminiOutput.classList.remove('hidden');
-                    }
-                    await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, i)));
-                }
-            }
-        }
-
-        document.getElementById('generateAnalysisBtn').addEventListener('click', () => {
-            const prompt = `
-                You are a financial analyst. Based on the following data for JFrog (FROG) stock in July 2025, write a concise summary of its performance and the market sentiment heading into the Q2 earnings call.
-                
-                Key Data:
-                - Average July Closing Price: $41.88
-                - New 52-Week High Reached: $45.47
-                - Key Catalyst 1 (July 17): Announcement of a new "Robust MCP Server" for AI workflows.
-                - Key Catalyst 2 (July 30): swampUP conference speaker list includes leaders from NVIDIA and GitHub.
-                
-                Focus on the narrative of a late-month, AI-driven rally creating high expectations for the earnings report. Keep the tone professional and insightful.
-            `;
-            callGeminiAPI(prompt);
-        });
-
-        document.getElementById('generateForecastBtn').addEventListener('click', () => {
-            const prompt = `
-                You are a financial analyst. Given the performance of JFrog (FROG) stock in July 2025, which saw a strong rally to a new 52-week high fueled by a compelling AI narrative, generate three potential future scenarios for the stock's reaction to its Q2 earnings report on August 8th:
-
-                1.  **Bullish Scenario:** What needs to happen for the stock to continue its upward trend?
-                2.  **Bearish Scenario:** What are the potential risks or results that could cause a sharp sell-off?
-                3.  **Neutral Scenario:** What kind of report would lead to a sideways or muted stock reaction?
-
-                Base your analysis on the provided context of high expectations. Be creative but plausible. Format the output clearly with headings for each scenario.
-            `;
-            callGeminiAPI(prompt);
-        });
-    </script>
 </body>
 </html>
