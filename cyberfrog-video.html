@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberfrog Video</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Main container -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+        <div class="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12 text-center">
+
+            <!-- Header Section -->
+            <header>
+                <h1 class="text-4xl md:text-5xl font-bold text-emerald-600 mb-4">
+                    Cyberfrog the Magnificent
+                </h1>
+                <p class="text-lg text-gray-600 mb-8">
+                    Guardian of Binaries.
+                </p>
+            </header>
+
+            <!-- Video Player Section -->
+            <main class="mb-8">
+                <!-- The video element uses the 'controls' attribute to show play/pause, volume, etc. -->
+                <!-- 'autoplay' and 'muted' are used together, as most browsers block autoplay with sound. -->
+                <!-- 'loop' will make the video restart automatically when it finishes. -->
+                <video class="w-full rounded-lg shadow-2xl border-4 border-gray-200" controls autoplay muted loop>
+                    <!-- The source of the video. Since it's in the same repository, the path is direct. -->
+                    <source src="cyberfrog1.mp4" type="video/mp4">
+                    <!-- This message is shown if the user's browser doesn't support the video tag. -->
+                    Your browser does not support the video tag.
+                </video>
+            </main>
+
+            <!-- Navigation and Footer -->
+            <footer>
+                <!-- Link to go back to the main index page -->
+                <a href="./index.html" 
+                   class="inline-block bg-teal-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-teal-600 transition-transform transform hover:scale-105 duration-300 ease-in-out shadow-md mb-8">
+                    &larr; Back to Home
+                </a>
+                <p class="text-sm text-gray-400">&copy; אין אדם קונה דעתו בפת לחמו </p>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
