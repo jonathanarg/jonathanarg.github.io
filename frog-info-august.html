@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JFrog Market Analysis: The AI-Fueled Breakout of August 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5FAF8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 45vh;
+            max-height: 450px;
+        }
+        .kpi-card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 6px solid #66CDAA;
+        }
+        .kpi-value {
+            font-size: 2.5rem;
+            line-height: 2.75rem;
+            font-weight: 900;
+            color: #2F4F4F;
+        }
+        .kpi-label {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 600;
+            color: #3CB371;
+            margin-top: 0.5rem;
+        }
+        .competitor-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            height: 100%;
+        }
+        .competitor-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+        .prediction-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-12">
+
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-black mb-2" style="color: #2E8B57;">The AI-Fueled Breakout</h1>
+            <p class="text-lg md:text-xl font-semibold" style="color: #3CB371;">Analyzing JFrog's Landmark August 2025 Performance</p>
+        </header>
+
+        <section id="intro" class="max-w-4xl mx-auto text-center mb-12 md:mb-16">
+            <h2 class="text-3xl font-bold mb-4" style="color: #2F4F4F;">A New Leader Emerges</h2>
+            <p class="text-md" style="color: #556B2F;">
+                August 2025 was an inflection point for JFrog. A stellar Q2 earnings report, driven by accelerating cloud growth and a compelling AI strategy, catalyzed a significant market re-rating, establishing the company as the new standard for profitable growth in the software supply chain market.
+            </p>
+        </section>
+
+        <section id="kpis" class="mb-12 md:mb-16">
+             <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #2F4F4F;">The Q2 Earnings Catalyst</h2>
+                 <p class="text-md" style="color: #556B2F;">
+                    On August 7th, JFrog delivered a decisive beat on all key metrics, signaling to investors that its growth was accelerating in the most critical areas.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+                <div class="kpi-card">
+                    <div class="kpi-value"><strong>$127.2M</strong></div>
+                    <div class="kpi-label">Total Revenue (<strong>+23%</strong>)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value"><strong>$0.18</strong></div>
+                    <div class="kpi-label">Non-GAAP EPS</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value"><strong>+45%</strong></div>
+                    <div class="kpi-label">Cloud Revenue Growth</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value"><strong>+45%</strong></div>
+                    <div class="kpi-label">Growth in >$1M Customers</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="price-trend" class="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-12 md:mb-16">
+             <div class="text-left mb-6">
+                <h2 class="text-3xl font-bold mb-2" style="color: #2F4F4F;">The Post-Earnings Surge</h2>
+                <p class="text-md" style="color: #556B2F;">
+                    The market's reaction was immediate and powerful. Following the earnings beat, JFrog's stock surged over <strong>15%</strong>, reflecting a fundamental re-rating by investors who now see a clear path of accelerating, profitable growth.
+                </p>
+            </div>
+            <div class="chart-container">
+                <canvas id="priceTrendChart"></canvas>
+            </div>
+        </section>
+
+        <section id="competitive-landscape" class="mb-12 md:mb-16">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #2F4F4F;">The New Hierarchy in the Software Supply Chain</h2>
+                <p class="text-md" style="color: #556B2F;">
+                    August clarified the emerging hierarchy in the market. JFrog's execution set it apart, while competitors faced different challenges and pursued different strategies.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="competitor-card">
+                    <div class="competitor-icon" style="color: #3CB371;">🚀</div>
+                    <h3 class="text-xl font-bold my-2" style="color: #2F4F4F;">JFrog: The Profitable Growth Leader</h3>
+                    <p style="color: #556B2F;">JFrog proved it can deliver both the high-growth profile of a disruptor and the financial discipline investors now demand. Its strategy as the universal "system of record" for all software, including AI models, is resonating with the enterprise market.</p>
+                </div>
+                <div class="competitor-card">
+                    <div class="competitor-icon" style="color: #66CDAA;">❓</div>
+                    <h3 class="text-xl font-bold my-2" style="color: #2F4F4F;">GitLab: The Growth-at-a-Cost Challenger</h3>
+                    <p style="color: #556B2F;">GitLab remains a significant player, but its stock volatility reflects a "show-me" attitude from investors. The market is waiting for proof that its strong top-line growth can be translated into a sustainable, profitable business model.</p>
+                </div>
+                <div class="competitor-card">
+                    <div class="competitor-icon" style="color: #98FB98;">🤖</div>
+                    <h3 class="text-xl font-bold my-2" style="color: #2F4F4F;">GitHub: The AI Platform Behemoth</h3>
+                    <p style="color: #556B2F;">Backed by Microsoft, GitHub is playing a different game. It unleashed a wave of AI innovation, including GPT-5 in Copilot, aiming to own the entire developer lifecycle and representing a powerful, long-term disruptive force.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="performance-comparison" class="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-12 md:mb-16">
+             <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #2F4F4F;">A Divergence in Performance</h2>
+                <p class="text-md" style="color: #556B2F;">
+                    The stock market's verdict in August was clear. JFrog's strong execution was rewarded with a significant rally, while GitLab's uncertainty led to a decline, showcasing a clear divergence in investor sentiment.
+                </p>
+            </div>
+            <div class="chart-container h-80 max-h-[400px]">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </section>
+
+        <section id="future-predictions" class="mb-12 md:mb-16">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #2F4F4F;">Forward Outlook: The Next Three Quarters</h2>
+                <p class="text-md" style="color: #556B2F;">
+                    With momentum high, the focus shifts to sustaining execution. Here are the potential scenarios for JFrog through the next three reporting periods.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="prediction-card">
+                    <h3 class="text-xl font-bold mb-4 text-center" style="color: #2F4F4F;">Q3 2025 (Ends Sep 30)</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #2E8B57;">🚀 Bullish:</span> AI partnerships translate to early revenue. Cloud growth remains above <strong>40%</strong>. Beats guidance, pushing stock toward new highs.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$52 - $55</strong></p>
+                        </div>
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #FFD700;">↔️ Neutral:</span> Meets guidance. Cloud growth moderates to the high 30s. Stock consolidates in the high <strong>$40s</strong> as the market digests recent gains.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$45 - $49</strong></p>
+                        </div>
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #DC143C;">📉 Bearish:</span> Macro headwinds soften enterprise demand. Cloud growth decelerates faster than expected. A miss on revenue guidance leads to profit-taking.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$39 - $42</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="prediction-card">
+                    <h3 class="text-xl font-bold mb-4 text-center" style="color: #2F4F4F;">Q4 2025 (Ends Dec 31)</h3>
+                     <div class="space-y-4">
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #2E8B57;">🚀 Bullish:</span> Strong year-end enterprise deals. Company raises FY2026 forecast, citing strong AI-related pipeline. Security products show accelerating cross-sell adoption.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$56 - $60</strong></p>
+                        </div>
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #FFD700;">↔️ Neutral:</span> Solid quarter that meets raised expectations. Net Dollar Retention rate remains stable. Commentary is positive but lacks a new major catalyst.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$48 - $52</strong></p>
+                        </div>
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #DC143C;">📉 Bearish:</span> Competitive pressure from GitHub's GPT-5 suite begins to impact new customer conversations. Guidance for Q1 2026 is conservative.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$42 - $45</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="prediction-card">
+                    <h3 class="text-xl font-bold mb-4 text-center" style="color: #2F4F4F;">Q1 2026 (Ends Mar 31)</h3>
+                     <div class="space-y-4">
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #2E8B57;">🚀 Bullish:</span> First material revenue from AI-specific offerings is reported. Company announces a new strategic partnership. Stock breaks the <strong>$50</strong> barrier decisively.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$60 - $65</strong></p>
+                        </div>
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #FFD700;">↔️ Neutral:</span> Growth continues as expected. The story remains consistent, focusing on execution. The stock trades in a range defined by valuation multiples.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$50 - $55</strong></p>
+                        </div>
+                        <div>
+                            <p><span class="font-bold text-lg" style="color: #DC143C;">📉 Bearish:</span> Signs of margin compression appear as the company invests heavily to compete with Microsoft/GitHub, raising concerns about profitability.</p>
+                            <p class="text-sm" style="color: #556B2F;">Est. Range: <strong>$44 - $48</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="prediction-chart-section" class="bg-white rounded-xl shadow-lg p-4 sm:p-6 mt-12 md:mt-16">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: #2F4F4F;">Visualizing the Outlook</h2>
+                <p class="text-md" style="color: #556B2F;">
+                    This chart visualizes the potential stock price ranges for JFrog based on the bullish, neutral, and bearish scenarios for the upcoming quarters.
+                </p>
+            </div>
+            <div class="chart-container h-96 max-h-[500px]">
+                <canvas id="predictionChart"></canvas>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 md:mt-16 pt-8 border-t-2" style="border-color: #98FB98;">
+            <p class="max-w-3xl mx-auto font-semibold" style="color: #556B2F;">
+                JFrog's performance in August was a masterclass in execution. By delivering on its promises of growth, profitability, and strategic relevance in the AI era, the company has distinguished itself from its competitors and earned the confidence of the market.
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        function wrapLabel(str, max_width) {
+            if (str.length <= max_width) return str;
+            const words = str.split(' ');
+            let lines = [];
+            let current_line = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((current_line + " " + words[i]).length > max_width) {
+                    lines.push(current_line);
+                    current_line = words[i];
+                } else {
+                    current_line += " " + words[i];
+                }
+            }
+            lines.push(current_line);
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) return label.join(' ');
+            return label;
+        };
+
+        const greenPalette = {
+            darkGreen: '#2E8B57',
+            highlightGreen: '#3CB371',
+            mediumGreen: '#66CDAA',
+            lightGreen: '#98FB98',
+            darkGray: '#2F4F4F',
+            mediumGray: '#556B2F',
+            negative: '#DC143C',
+            neutral: '#FFD700'
+        };
+
+        const priceData = [
+            { x: '2025-08-01', y: 41.50 }, { x: '2025-08-04', y: 42.10 },
+            { x: '2025-08-05', y: 42.50 }, { x: '2025-08-06', y: 42.80 },
+            { x: '2025-08-07', y: 43.10 }, { x: '2025-08-08', y: 46.50 },
+            { x: '2025-08-11', y: 46.80 }, { x: '2025-08-12', y: 41.05 },
+            { x: '2025-08-13', y: 45.90 }, { x: '2025-08-14', y: 46.20 },
+            { x: '2025-08-15', y: 46.80 }, { x: '2025-08-18', y: 47.10 },
+            { x: '2025-08-19', y: 47.00 }, { x: '2025-08-20', y: 47.20 },
+            { x: '2025-08-21', y: 47.30 }, { x: '2025-08-22', y: 47.40 },
+            { x: '2025-08-25', y: 47.50 }, { x: '2025-08-26', y: 46.16 }
+        ];
+
+        const priceChartCtx = document.getElementById('priceTrendChart');
+        if (priceChartCtx) {
+            new Chart(priceChartCtx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'FROG Closing Price ($)',
+                        data: priceData,
+                        borderColor: greenPalette.darkGreen,
+                        backgroundColor: 'rgba(60, 179, 113, 0.1)',
+                        fill: true,
+                        tension: 0.1,
+                        borderWidth: 3,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: { unit: 'day', displayFormats: { day: 'MMM d' } },
+                            grid: { display: false },
+                            ticks: { color: greenPalette.mediumGray }
+                        },
+                        y: {
+                            title: { display: true, text: 'Closing Price (USD)', color: greenPalette.darkGray },
+                            grid: { color: '#f0f0f0' },
+                            ticks: { color: greenPalette.mediumGray }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: { title: (ctx) => new Date(ctx[0].parsed.x).toLocaleDateString() },
+                            backgroundColor: greenPalette.darkGray,
+                        },
+                        annotation: {
+                            annotations: {
+                                earningsLine: {
+                                    type: 'line',
+                                    xMin: '2025-08-07',
+                                    xMax: '2025-08-07',
+                                    borderColor: greenPalette.darkGreen,
+                                    borderWidth: 2,
+                                    borderDash: [6, 6],
+                                    label: {
+                                        content: 'Q2 Earnings Beat',
+                                        display: true,
+                                        position: 'start',
+                                        backgroundColor: greenPalette.darkGreen,
+                                        font: { weight: 'bold' }
+                                    }
+                                },
+                                profitTakingLine: {
+                                    type: 'line',
+                                    xMin: '2025-08-12',
+                                    xMax: '2025-08-12',
+                                    borderColor: greenPalette.neutral,
+                                    borderWidth: 2,
+                                    borderDash: [6, 6],
+                                    label: {
+                                        content: 'Profit-Taking',
+                                        display: true,
+                                        position: 'end',
+                                        yAdjust: 20,
+                                        backgroundColor: greenPalette.neutral,
+                                        font: { weight: 'bold' },
+                                        color: greenPalette.darkGray
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        const performanceCtx = document.getElementById('performanceChart');
+        if (performanceCtx) {
+            new Chart(performanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['JFrog (FROG)', 'GitLab (GTLB)'],
+                    datasets: [{
+                        label: 'August Stock Performance (%)',
+                        data: [11.2, -7.4],
+                        backgroundColor: [greenPalette.highlightGreen, greenPalette.negative],
+                        barPercentage: 0.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            title: { display: true, text: 'Stock Price Change (%)', color: greenPalette.darkGray },
+                            grid: { color: '#f0f0f0' },
+                            ticks: { 
+                                color: greenPalette.mediumGray,
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: { 
+                            grid: { display: false },
+                            ticks: { color: greenPalette.darkGray, font: { size: 14 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: { 
+                                title: tooltipTitleCallback,
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '%';
+                                    }
+                                    return label;
+                                }
+                            },
+                            backgroundColor: greenPalette.darkGray,
+                        }
+                    }
+                }
+            });
+        }
+
+        const predictionCtx = document.getElementById('predictionChart');
+        if (predictionCtx) {
+            new Chart(predictionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Q3 2025', 'Q4 2025', 'Q1 2026'],
+                    datasets: [
+                        {
+                            label: 'Bearish',
+                            data: [[39, 42], [42, 45], [44, 48]],
+                            backgroundColor: 'rgba(220, 20, 60, 0.7)',
+                            borderColor: 'rgba(220, 20, 60, 1)',
+                            borderWidth: 1,
+                            borderSkipped: false
+                        },
+                        {
+                            label: 'Neutral',
+                            data: [[45, 49], [48, 52], [50, 55]],
+                            backgroundColor: 'rgba(255, 215, 0, 0.7)',
+                            borderColor: 'rgba(255, 215, 0, 1)',
+                            borderWidth: 1,
+                            borderSkipped: false
+                        },
+                        {
+                            label: 'Bullish',
+                            data: [[52, 55], [56, 60], [60, 65]],
+                            backgroundColor: 'rgba(46, 139, 87, 0.7)',
+                            borderColor: 'rgba(46, 139, 87, 1)',
+                            borderWidth: 1,
+                            borderSkipped: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: greenPalette.darkGray, font: { size: 14 } }
+                        },
+                        y: {
+                            title: { display: true, text: 'Predicted Stock Price Range (USD)', color: greenPalette.darkGray },
+                            ticks: {
+                                color: greenPalette.mediumGray,
+                                callback: function(value) {
+                                    return '$' + value;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: greenPalette.darkGray
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: greenPalette.darkGray,
+                            callbacks: {
+                                label: function(context) {
+                                    const raw = context.raw;
+                                    return `${context.dataset.label}: $${raw[0]} - $${raw[1]}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
