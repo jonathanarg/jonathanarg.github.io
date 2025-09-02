@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KDSGVBZ2C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-6KDSGVBZ2C');
+    </script>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אם אשכחך ירושלים: אינפוגרפיקה אינטראקטיבית</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Jerusalem Stone & Gold -->
+    <!-- Application Structure Plan: This single-page application is structured as a narrative journey, guiding the user from the verse's emotional origin to its modern-day significance. It begins with an impactful hero section stating the oath. The user then scrolls through thematic sections: 1. 'Source of the Oath' sets the historical scene on the rivers of Babylon. 2. 'Deconstructing the Oath' uses two large, clickable cards to let users explore the meanings of 'Forget my right hand' and 'Let my tongue cleave...'. 3. 'The Climax' isolates and explains the crucial concept of placing Jerusalem 'above my chiefest joy'. 4. 'The Oath as an Eternal Symbol' uses a dynamic radar chart to visualize and compare the verse's impact across different facets of Jewish and Israeli culture (Tradition, Zionism, Art, Military). This thematic, interactive structure was chosen to transform a dense academic analysis into an engaging, visual, and self-paced exploration. -->
+    <!-- Visualization & Content Choices: 1. Deconstructing the Oath: Goal=Organize/Compare, Method=Interactive HTML Cards, Interaction=Clicking a card reveals its detailed meaning in a dedicated space below. Justification=Breaks the complex oath into two manageable parts, encouraging active user participation over passive reading. 2. The Oath as a Symbol: Goal=Compare, Method=Radar Chart (Chart.js), Interaction=Hovering over data points shows tooltips. Justification=A radar chart offers a powerful, immediate visual comparison of the verse's influence in multiple domains, conveying its multifaceted importance far more effectively than a simple list. Other content is presented using strong typography and layout to maintain the infographic feel. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #FDFBF6;
+            color: #433A3F;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 60vh;
+            max-height: 500px;
+        }
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .nav-link.active {
+            color: #DAA520;
+            border-bottom-color: #DAA520;
+        }
+        .interactive-card {
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border: 2px solid transparent;
+        }
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+        }
+        .interactive-card.selected {
+            border-color: #DAA520;
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-[#FDFBF6]/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl font-bold text-[#433A3F]">שבועת ירושלים</h1>
+                <div class="hidden md:flex items-center gap-x-8 lg:gap-x-10">
+                    <a href="#proverb" class="nav-link text-gray-600 hover:text-[#DAA520] border-b-2 border-transparent pb-1">השבועה</a>
+                    <a href="#source" class="nav-link text-gray-600 hover:text-[#DAA520] border-b-2 border-transparent pb-1">המקור</a>
+                    <a href="#deconstruction" class="nav-link text-gray-600 hover:text-[#DAA520] border-b-2 border-transparent pb-1">הניתוח</a>
+                    <a href="#legacy" class="nav-link text-gray-600 hover:text-[#DAA520] border-b-2 border-transparent pb-1">הסמל</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+
+        <section id="proverb" class="text-center min-h-[70vh] flex flex-col justify-center items-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 leading-tight text-[#433A3F]">אִם אֶשְׁכָּחֵךְ יְרוּשָׁלִָם תִּשְׁכַּח יְמִינִי</h2>
+            <p class="text-2xl md:text-3xl text-gray-500 max-w-4xl mx-auto">תִּדְבַּק לְשׁוֹנִי לְחִכִּי אִם לֹא אֶזְכְּרֵכִי</p>
+            <div class="mt-8 text-md text-gray-500">
+                מקור: <span class="font-semibold">תהילים קל"ז, ה'-ו'</span>
+            </div>
+        </section>
+
+        <div class="my-12 flex justify-center">
+            <img src="jerusalem.png" alt="איור של שבועת ירושלים" class="max-w-md w-full h-auto rounded-lg shadow-lg object-cover border-4 border-white" onerror="this.onerror=null;this.src='https://placehold.co/600x400/FDFBF6/3C3633?text=Image+Not+Found';">
+        </div>
+
+        <section id="source" class="py-16 md:py-24 bg-stone-100 rounded-2xl my-12">
+            <div class="text-center mb-12 px-4">
+                <h3 class="text-3xl font-bold">מקור השבועה: קינה על נהרות בבל</h3>
+                <p class="mt-2 text-gray-600 max-w-3xl mx-auto">המזמור נכתב מתוך כאב הגלות בבבל (586 לפנה"ס). שוביהם של הגולים דרשו מהם בלעג "שִׁירוּ לָנוּ מִשִּיר צִיּוֹן", והשבועה היא התשובה הנצחית לדרישה זו.</p>
+            </div>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                <blockquote class="text-xl italic border-r-4 border-[#DAA520] pr-6">
+                    "עַל נַהֲרוֹת בָּבֶל שָׁם יָשַׁבְנוּ גַּם בָּכִינוּ בְּזָכְרֵנוּ אֶת צִיּוֹן... אֵיךְ נָשִׁיר אֶת שִׁיר ה' עַל אַדְמַת נֵכָר?"
+                    <cite class="block not-italic text-right mt-4 text-gray-500 text-base">— תהילים קל"ז, א'-ד'</cite>
+                </blockquote>
+            </div>
+        </section>
+
+        <section id="deconstruction" class="py-16 md:py-24">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">ניתוח השבועה: קללה עצמית מותנית</h3>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">השבועה היא קללה עצמית שהאדם מטיל על עצמו אם יפר את התנאי. היא בנויה משני חלקים המשקפים אובדן מהותי של היכולת האנושית. לחצו כדי ללמוד עוד.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div id="handCard" class="interactive-card p-8 bg-white rounded-lg shadow-sm cursor-pointer text-center">
+                    <p class="text-5xl mb-4">✋</p>
+                    <h4 class="text-2xl font-semibold">"תִּשְׁכַּח יְמִינִי"</h4>
+                    <p class="text-gray-500 mt-2">שיתוק היכולת המעשית</p>
+                </div>
+                <div id="tongueCard" class="interactive-card p-8 bg-white rounded-lg shadow-sm cursor-pointer text-center">
+                    <p class="text-5xl mb-4">🗣️</p>
+                    <h4 class="text-2xl font-semibold">"תִּדְבַּק לְשׁוֹנִי לְחִכִּי"</h4>
+                    <p class="text-gray-500 mt-2">שיתוק יכולת הביטוי</p>
+                </div>
+            </div>
+            <div id="deconstruction-explanation" class="mt-10 p-8 bg-stone-100 rounded-lg max-w-4xl mx-auto text-center min-h-[150px] flex items-center justify-center">
+                <p class="text-lg text-gray-700">בחר באחד ממרכיבי השבועה כדי לראות את פירושו.</p>
+            </div>
+        </section>
+        
+        <div id="climax" class="py-16 md:py-24 text-center">
+             <div class="max-w-3xl mx-auto p-8 bg-gradient-to-br from-[#DAA520]/80 to-[#c8981d] rounded-2xl shadow-xl text-white">
+                <h3 class="text-3xl font-bold">שיא השבועה</h3>
+                 <p class="mt-4 text-2xl font-light leading-relaxed">"אִם לֹא אַעֲלֶה אֶת יְרוּשָׁלַיִם<br><span class="font-semibold text-3xl">עַל רֹאשׁ שִׂמְחָתִי</span>"</p>
+                <p class="mt-6 text-white/90">זהו התנאי החיובי: לא רק להימנע משכחה, אלא למקם את זכר ירושלים בראש סדר העדיפויות הרגשי, אפילו ברגעי האושר הגדולים ביותר.</p>
+            </div>
+        </div>
+
+        <section id="legacy" class="py-16 md:py-24 bg-stone-100 rounded-2xl my-12">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">השבועה כסמל נצחי</h3>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">במשך אלפי שנים, השבועה הפכה לסמל מרכזי בתרבות היהודית והישראלית. התרשים ממחיש את השפעתה בתחומים שונים.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="legacyChart"></canvas>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#433A3F] text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>&copy; 2025 | אינפוגרפיקה לחקר שבועת ירושלים</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section, main div[id]');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            const href = link.getAttribute('href');
+                            if (href && href.substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                if (section.id) observer.observe(section);
+            });
+            
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            const handCard = document.getElementById('handCard');
+            const tongueCard = document.getElementById('tongueCard');
+            const explanationBox = document.getElementById('deconstruction-explanation');
+
+            const explanations = {
+                hand: `
+                    <h4 class="text-xl font-semibold mb-2">אובדן הכוח והיצירה</h4>
+                    <p class="text-gray-700">יד ימין מסמלת כוח, מיומנות, נגינה ושבועה. שכחת ירושלים כמוה כאובדן היכולת הבסיסית לפעול, ליצור ולהשפיע בעולם. זהו שיתוק פיזי ורוחני, עונש מידה כנגד מידה על בגידה בזיכרון.</p>
+                `,
+                tongue: `
+                    <h4 class="text-xl font-semibold mb-2">אובדן הדיבור והשירה</h4>
+                    <p class="text-gray-700">הלשון היא כלי הביטוי, התפילה והשירה. שכחת ירושלים משמעה אילמות, חוסר יכולת לבטא את הנפש. זוהי תשובה ישירה ללעג השובים: אם לא אוכל לשיר את שירי ציון, עדיף שלא אשיר כלל.</p>
+                `
+            };
+
+            handCard.addEventListener('click', () => {
+                explanationBox.innerHTML = explanations.hand;
+                handCard.classList.add('selected');
+                tongueCard.classList.remove('selected');
+            });
+
+            tongueCard.addEventListener('click', () => {
+                explanationBox.innerHTML = explanations.tongue;
+                tongueCard.classList.add('selected');
+                handCard.classList.remove('selected');
+            });
+
+            const ctx = document.getElementById('legacyChart').getContext('2d');
+            Chart.defaults.font.family = "'Assistant', sans-serif";
+            Chart.defaults.font.size = 14;
+            Chart.defaults.color = '#433A3F';
+            
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['מסורת (חתונה)', 'ציונות ושיבה לארץ', 'אמנות ושירה', 'טקסים צבאיים', 'זהות אישית'],
+                    datasets: [{
+                        label: 'עוצמת ההשפעה והסמליות',
+                        data: [10, 9, 8, 9, 7],
+                        fill: true,
+                        backgroundColor: 'rgba(218, 165, 32, 0.2)',
+                        borderColor: 'rgb(218, 165, 32)',
+                        pointBackgroundColor: 'rgb(218, 165, 32)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(218, 165, 32)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(253, 251, 246, 0.7)',
+                                stepSize: 2
+                            },
+                             min: 0,
+                             max: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
