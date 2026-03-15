@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic Tac Toe: Forest Animals with Attitude</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a3d1a;
+    color: #f5f0e8;
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(34,85,34,0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(20,50,20,0.6) 0%, transparent 50%);
+  }
+
+  #title-bar {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    text-align: center;
+    color: #a8d5a2;
+    font-style: italic;
+    min-height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    max-width: 600px;
+    animation: fadeTitle 0.4s ease;
+  }
+
+  @keyframes fadeTitle {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  h2.game-title {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: #ffd700;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  #mode-select {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mode-btn {
+    background: #8B4513;
+    color: #f5f0e8;
+    border: 3px solid #a0522d;
+    border-radius: 12px;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  .mode-btn:hover {
+    background: #a0522d;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(0,0,0,0.5);
+  }
+
+  #game-area { display: none; flex-direction: column; align-items: center; width: 100%; }
+
+  #status {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: #f5f0e8;
+    margin: 10px 0;
+    min-height: 2em;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    background: #8B4513;
+    border: 4px solid #a0522d;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    width: min(360px, 90vw);
+    height: min(360px, 90vw);
+  }
+
+  .cell {
+    background: #f5f0e8;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    user-select: none;
+    color: #1a3d1a;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .cell:hover:not(.taken) {
+    background: #e8f5e8;
+    transform: scale(1.04);
+  }
+
+  .cell.taken { cursor: default; }
+
+  .cell.x-mark { color: #1a5c1a; }
+  .cell.o-mark { color: #8B2500; }
+
+  .cell.winner {
+    background: #ffd700;
+    animation: winPulse 0.6s ease infinite alternate;
+    box-shadow: 0 0 20px rgba(255,215,0,0.7);
+  }
+
+  @keyframes winPulse {
+    from { transform: scale(1);    box-shadow: 0 0 15px rgba(255,215,0,0.5); }
+    to   { transform: scale(1.06); box-shadow: 0 0 30px rgba(255,215,0,0.9); }
+  }
+
+  #insult-box {
+    margin-top: 18px;
+    background: rgba(0,0,0,0.35);
+    border: 2px solid #8B4513;
+    border-radius: 14px;
+    padding: 14px 20px;
+    max-width: min(400px, 92vw);
+    width: 100%;
+    min-height: 80px;
+    text-align: center;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    line-height: 1.6;
+    animation: slideInsult 0.35s ease;
+  }
+
+  @keyframes slideInsult {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .animal-name { font-size: 1.05em; font-weight: bold; color: #ffd700; }
+  .animal-quote { font-style: italic; color: #d4efd4; }
+
+  #play-again {
+    display: none;
+    margin-top: 22px;
+    background: #1a5c1a;
+    color: #ffd700;
+    border: 3px solid #ffd700;
+    border-radius: 14px;
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+  }
+
+  #play-again:hover {
+    background: #236b23;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 22px rgba(0,0,0,0.6);
+  }
+
+  .mode-label {
+    font-size: 0.8rem;
+    color: #a8d5a2;
+    margin-top: 6px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h2 class="game-title">🌲 FOREST TIC TAC TOE 🌲</h2>
+<div id="title-bar">The forest awaits your questionable decisions.</div>
+
+<div id="mode-select">
+  <div>
+    <button class="mode-btn" onclick="startGame('pvp')">🧑 vs 🧑<br><small>Player vs Player</small></button>
+  </div>
+  <div>
+    <button class="mode-btn" onclick="startGame('pvc')">🧑 vs 🤖<br><small>Player vs Computer</small></button>
+  </div>
+</div>
+
+<div id="game-area">
+  <div id="status">X's turn</div>
+  <div id="board">
+    <div class="cell" onclick="handleClick(0)"></div>
+    <div class="cell" onclick="handleClick(1)"></div>
+    <div class="cell" onclick="handleClick(2)"></div>
+    <div class="cell" onclick="handleClick(3)"></div>
+    <div class="cell" onclick="handleClick(4)"></div>
+    <div class="cell" onclick="handleClick(5)"></div>
+    <div class="cell" onclick="handleClick(6)"></div>
+    <div class="cell" onclick="handleClick(7)"></div>
+    <div class="cell" onclick="handleClick(8)"></div>
+  </div>
+  <div id="insult-box">🌿 Choose your mode and let the forest judge you.</div>
+</div>
+
+<button id="play-again" onclick="resetGame()">Do you DARE play again? 🌲</button>
+
+<script>
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let board = Array(9).fill(null);
+let currentPlayer = 'X';
+let gameMode = null;   // 'pvp' | 'pvc'
+let gameOver = false;
+let moveCount = 0;
+let aiThinking = false;
+
+// ─── ROTATING TITLES ─────────────────────────────────────────────────────────
+const TITLES = [
+  "The squirrel demands you think harder.",
+  "Even the mushrooms are judging you.",
+  "A hedgehog somewhere is deeply disappointed.",
+  "The forest has seen better players. Many better players.",
+  "The owls are filing a formal complaint.",
+  "Somewhere a badger just facepalmed.",
+  "The deer are watching. They're not impressed.",
+  "This move has been logged in the Forest Shame Archives.",
+  "The foxes are whispering. It's not complimentary.",
+  "A passing wolf just laughed into the wind.",
+  "The trees are groaning. That's not the wind.",
+  "Forest consensus: you could try harder.",
+  "The bears have convened an emergency meeting about this.",
+  "Nature itself is reconsidering your life choices.",
+  "The woodland creatures await your inevitable mistake.",
+  "Even the slugs are moving faster than your thinking.",
+  "A raven has flown off to spread news of this game.",
+  "The forest floor fungi are more strategic than this.",
+  "Three squirrels just bet acorns against you.",
+  "The ancient trees have witnessed empires fall. And this.",
+];
+
+function updateTitle() {
+  const el = document.getElementById('title-bar');
+  el.style.animation = 'none';
+  el.offsetHeight; // reflow
+  el.style.animation = 'fadeTitle 0.4s ease';
+  el.textContent = TITLES[moveCount % TITLES.length];
+}
+
+// ─── ANIMALS & INSULTS ────────────────────────────────────────────────────────
+const ANIMALS = [
+  {
+    name: "Gerald the Badger", emoji: "🦡",
+    insults: [
+      "That was painfully predictable.",
+      "I've seen better tactics from a confused earthworm.",
+      "My sett has more strategic depth than this game.",
+      "Are you TRYING to lose? Because you're nailing it.",
+    ]
+  },
+  {
+    name: "Fiona the Fox", emoji: "🦊",
+    insults: [
+      "Oh, *that's* your move? Bold choice. Very bold.",
+      "I calculated every outcome. You avoided none of the bad ones.",
+      "Darling, I outthought you before you even clicked.",
+      "Remind me why I'm watching this for entertainment?",
+    ]
+  },
+  {
+    name: "Reginald the Owl", emoji: "🦉",
+    insults: [
+      "Statistically speaking, a coin flip would outperform you.",
+      "I have published three academic papers about moves worse than that. You are now in a fourth.",
+      "Hoo... hoo thought this was a good idea? Not I.",
+      "Your spatial reasoning scores are, frankly, alarming.",
+    ]
+  },
+  {
+    name: "Barry the Bear", emoji: "🐻",
+    insults: [
+      "I hibernate smarter than you play.",
+      "One more move like that and I'm eating your picnic.",
+      "You call that a strategy? I call it a snack for me.",
+      "The salmon in the river play better. And they're dead.",
+    ]
+  },
+  {
+    name: "Kevin the Squirrel", emoji: "🐿️",
+    insults: [
+      "OHMYGOSH I buried a nut in a better spot than THAT MOVE!",
+      "I forgot where I buried 400 acorns and I'm STILL smarter than this!!",
+      "Every cell! EVERY CELL WAS WRONG! I'm vibrating with disappointment!",
+      "AAAAAAH why didn't you take the CENTER THE CENTER THE CENTER—",
+    ]
+  },
+  {
+    name: "Sharon the Hedgehog", emoji: "🦔",
+    insults: [
+      "No, no, it's *fine*. I'm sure that move made *some* sense to *someone*.",
+      "I'm not angry. I'm just... so incredibly disappointed.",
+      "Oh. You went there. Interesting. Very... interesting choice.",
+      "I would curl into a ball right now, but I'm already doing that. About this game.",
+    ]
+  },
+  {
+    name: "Derek the Deer", emoji: "🦌",
+    insults: [
+      "I have antlers on my head. I am still more focused than you.",
+      "I froze in headlights once. You've been frozen this entire game.",
+      "The rut has more dignity than this performance.",
+      "My hooves. You're losing to a creature with hooves.",
+    ]
+  },
+  {
+    name: "Wanda the Wolf", emoji: "🐺",
+    insults: [
+      "I HOWL to the moon in anguish at your tactical failures!",
+      "The pack would have exiled you three moves ago.",
+      "I am drama. I am theatre. But even I cannot dramatize how bad that was.",
+      "By the frost-bitten forests of my ancestors — WHY.",
+    ]
+  },
+];
+
+const WIN_TAUNTS = [
+  { name: "Gerald the Badger", emoji: "🦡", quote: "Well. The forest has spoken. Try not to embarrass yourself next time." },
+  { name: "Fiona the Fox", emoji: "🦊", quote: "I predicted this outcome in the first move. I always do." },
+  { name: "Reginald the Owl", emoji: "🦉", quote: "The data was unambiguous. The result was inevitable. You may go." },
+  { name: "Barry the Bear", emoji: "🐻", quote: "WINNER! Now everyone get out of my forest." },
+  { name: "Kevin the Squirrel", emoji: "🐿️", quote: "SOMEONE WON! THE GAME IS OVER! I NEED TO GO BURY SOMETHING TO CELEBRATE!!" },
+];
+
+const DRAW_TAUNTS = [
+  { name: "Sharon the Hedgehog", emoji: "🦔", quote: "A draw. Nobody won. Nobody lost. Nobody should be proud." },
+  { name: "Reginald the Owl", emoji: "🦉", quote: "A theoretical equilibrium. Also known as: both of you failed to win." },
+  { name: "Gerald the Badger", emoji: "🦡", quote: "Tie. You're both equally mediocre. Remarkable, really." },
+];
+
+function getInsult() {
+  const animal = ANIMALS[Math.floor(Math.random() * ANIMALS.length)];
+  const insult = animal.insults[Math.floor(Math.random() * animal.insults.length)];
+  return formatAnimalQuote(animal.emoji, animal.name, insult);
+}
+
+function formatAnimalQuote(emoji, name, quote) {
+  return `${emoji} <span class="animal-name">${name}</span> says: <span class="animal-quote">"${quote}"</span>`;
+}
+
+function showInsult(html) {
+  const box = document.getElementById('insult-box');
+  box.style.animation = 'none';
+  box.offsetHeight;
+  box.style.animation = 'slideInsult 0.35s ease';
+  box.innerHTML = html;
+}
+
+// ─── WIN / DRAW DETECTION ─────────────────────────────────────────────────────
+const WIN_LINES = [
+  [0,1,2],[3,4,5],[6,7,8], // rows
+  [0,3,6],[1,4,7],[2,5,8], // cols
+  [0,4,8],[2,4,6],         // diagonals
+];
+
+function checkWinner(b) {
+  for (const [a, c, d] of WIN_LINES) {
+    if (b[a] && b[a] === b[c] && b[a] === b[d]) {
+      return { player: b[a], line: [a, c, d] };
+    }
+  }
+  return null;
+}
+
+function isDraw(b) {
+  return b.every(cell => cell !== null) && !checkWinner(b);
+}
+
+// ─── MINIMAX ──────────────────────────────────────────────────────────────────
+function minimax(b, depth, isMaximizing) {
+  const winner = checkWinner(b);
+  if (winner) return winner.player === 'O' ? 10 - depth : depth - 10;
+  if (b.every(c => c !== null)) return 0;
+
+  if (isMaximizing) {
+    let best = -Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (!b[i]) {
+        b[i] = 'O';
+        best = Math.max(best, minimax(b, depth + 1, false));
+        b[i] = null;
+      }
+    }
+    return best;
+  } else {
+    let best = Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (!b[i]) {
+        b[i] = 'X';
+        best = Math.min(best, minimax(b, depth + 1, true));
+        b[i] = null;
+      }
+    }
+    return best;
+  }
+}
+
+function getBestMove(b) {
+  let bestScore = -Infinity;
+  let bestMove = -1;
+  for (let i = 0; i < 9; i++) {
+    if (!b[i]) {
+      b[i] = 'O';
+      const score = minimax(b, 0, false);
+      b[i] = null;
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = i;
+      }
+    }
+  }
+  return bestMove;
+}
+
+// ─── CORE GAME LOGIC ──────────────────────────────────────────────────────────
+function placeMove(index, player) {
+  board[index] = player;
+  moveCount++;
+
+  const cells = document.querySelectorAll('.cell');
+  cells[index].textContent = player;
+  cells[index].classList.add('taken', player === 'X' ? 'x-mark' : 'o-mark');
+
+  updateTitle();
+  showInsult(getInsult());
+
+  const result = checkWinner(board);
+  if (result) {
+    endGame(result);
+    return true;
+  }
+  if (isDraw(board)) {
+    endGameDraw();
+    return true;
+  }
+  return false;
+}
+
+function endGame(result) {
+  gameOver = true;
+  result.line.forEach(i => {
+    document.querySelectorAll('.cell')[i].classList.add('winner');
+  });
+
+  const taunt = WIN_TAUNTS[Math.floor(Math.random() * WIN_TAUNTS.length)];
+  let winnerLabel;
+  if (gameMode === 'pvc') {
+    winnerLabel = result.player === 'X' ? '🎉 You actually won?! The forest is shook.' : '🤖 The Computer wins. Predictably.';
+  } else {
+    winnerLabel = `🏆 Player ${result.player} wins!`;
+  }
+  document.getElementById('status').textContent = winnerLabel;
+  showInsult(formatAnimalQuote(taunt.emoji, taunt.name, taunt.quote));
+  document.getElementById('play-again').style.display = 'inline-block';
+}
+
+function endGameDraw() {
+  gameOver = true;
+  const taunt = DRAW_TAUNTS[Math.floor(Math.random() * DRAW_TAUNTS.length)];
+  document.getElementById('status').textContent = "🤝 It's a draw. How... uninspiring.";
+  showInsult(formatAnimalQuote(taunt.emoji, taunt.name, taunt.quote));
+  document.getElementById('play-again').style.display = 'inline-block';
+}
+
+function handleClick(index) {
+  if (gameOver || board[index] || aiThinking) return;
+  if (gameMode === 'pvc' && currentPlayer === 'O') return;
+
+  const ended = placeMove(index, currentPlayer);
+  if (ended) return;
+
+  if (gameMode === 'pvp') {
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    document.getElementById('status').textContent = `${currentPlayer}'s turn`;
+  } else {
+    // PvC: trigger AI
+    currentPlayer = 'O';
+    document.getElementById('status').textContent = "🌲 The forest is thinking...";
+    aiThinking = true;
+    setTimeout(triggerAI, 350);
+  }
+}
+
+function triggerAI() {
+  const move = getBestMove(board);
+  if (move === -1) { aiThinking = false; return; }
+
+  const ended = placeMove(move, 'O');
+  aiThinking = false;
+
+  if (!ended) {
+    currentPlayer = 'X';
+    document.getElementById('status').textContent = "Your turn (X)";
+  }
+}
+
+// ─── GAME SETUP / RESET ───────────────────────────────────────────────────────
+function startGame(mode) {
+  gameMode = mode;
+  document.getElementById('mode-select').style.display = 'none';
+  document.getElementById('game-area').style.display = 'flex';
+  document.getElementById('status').textContent = mode === 'pvp' ? "X goes first!" : "You are X. Go ahead, impress us.";
+  showInsult("🌿 The forest creatures lean in. Begin.");
+  updateTitle();
+}
+
+function resetGame() {
+  board = Array(9).fill(null);
+  currentPlayer = 'X';
+  gameOver = false;
+  moveCount = 0;
+  aiThinking = false;
+
+  document.querySelectorAll('.cell').forEach(cell => {
+    cell.textContent = '';
+    cell.className = 'cell';
+  });
+
+  document.getElementById('play-again').style.display = 'none';
+  document.getElementById('game-area').style.display = 'none';
+  document.getElementById('mode-select').style.display = 'flex';
+  document.getElementById('status').textContent = "X's turn";
+  document.getElementById('title-bar').textContent = "The forest awaits your questionable decisions.";
+  showInsult("🌿 Choose your mode and let the forest judge you.");
+  gameMode = null;
+}
+</script>
+</body>
+</html>
