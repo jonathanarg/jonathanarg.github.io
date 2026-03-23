@@ -83,10 +83,8 @@
 
     <script>
         // --- Configuration ---
-        const OREF_URL = 'https://www.oref.org.il/warningMessages/alert/History/AlertsHistory.json';
-        
-        // Using AllOrigins as the primary proxy for deployment. It handles CORS preflights automatically.
-        const PROXY_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(OREF_URL);
+        // Reverted to the exact proxy that you validated manually in your browser
+        const PROXY_URL = 'https://corsproxy.io/?url=' + encodeURIComponent('https://www.oref.org.il/warningMessages/alert/History/AlertsHistory.json');
         
         const LOCATIONS = {
             "תל אביב - עבר הירקון": "TEL AVIV",
@@ -173,10 +171,8 @@
                     if (testCycle > 4) { endTestMode(); return; }
                     data = getSimulatedData();
                 } else {
-                    // cache-buster appended to prevent the proxy from serving stale data
-                    const cacheBusterUrl = `${PROXY_URL}&cb=${new Date().getTime()}`;
-                    
-                    const response = await fetch(cacheBusterUrl, { cache: "no-store" });
+                    // Removed the &cb= parameter. Fetch API handles cache bypassing natively here.
+                    const response = await fetch(PROXY_URL, { cache: "no-store" });
                     
                     if (!response.ok) {
                         logDebug(`Proxy returned HTTP ${response.status}`, "error");
@@ -257,7 +253,7 @@
 
         // --- App Controls ---
         function startMonitor() {
-            // Unlock Audio Context (Requires explicit user click)
+            // Unlock Audio Context
             const initAudio = new SpeechSynthesisUtterance("");
             initAudio.volume = 0;
             window.speechSynthesis.speak(initAudio);
